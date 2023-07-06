@@ -1,27 +1,15 @@
-import axios from 'axios';
 import Spinner from './Spinner';
-import React, { useEffect, useState } from 'react'
+import useGif from '../hooks/useGif';
 
 
 
-const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
 
 
 function Random() {
-    const[spinner,setSpinner] = useState(false)
-    const [gif, setGif] =useState('');
-    async function fetchData(){
-        setSpinner(true);
-        const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`
-        let {data} = await axios.get(url);       
-        let imageSource = data.data.images.downsized_large.url;
-        setGif(imageSource);
-        console.log(imageSource);
-        setSpinner(false);
-    }
-    useEffect(()=>{
-        fetchData();
-    },[])
+   
+    
+    const { spinner, gif, fetchData} = useGif('')
+    
     let clickHandler=()=>{
         fetchData();
     }
